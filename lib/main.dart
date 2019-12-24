@@ -29,7 +29,7 @@ class _State extends State<MyApp> {
   }
 
   void _signInAnon() async {
-    FirebaseUser user = await _auth.signInAnonymously();
+    FirebaseUser user = (await _auth.signInAnonymously()).user;
     if(user != null && user.isAnonymous == true) {
       setState(() {
         _status = 'Signed in Anonymously';
