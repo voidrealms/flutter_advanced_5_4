@@ -25,14 +25,17 @@ class _State extends State<MyApp> {
 
   @override
   void initState() {
+    super.initState();
     _status = 'Not Authenticated';
   }
 
   void _signInAnon() async {
-    FirebaseUser user = (await _auth.signInAnonymously()).user;
+    final authResult = await _auth.signInAnonymously();
+    final user = authResult.user;
     if(user != null && user.isAnonymous == true) {
       setState(() {
-        _status = 'Signed in Anonymously';
+        _status = 'Signed in Anonymously:\n'
+            'User uid: ${authResult.user.uid}';
       });
     } else {
       setState(() {
